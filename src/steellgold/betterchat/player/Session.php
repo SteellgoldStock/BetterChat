@@ -3,6 +3,7 @@
 namespace steellgold\betterchat\player;
 
 use pocketmine\player\Player;
+use steellgold\betterchat\BetterChat;
 use steellgold\betterchat\player\ranks\Rank;
 use steellgold\betterchat\player\ranks\RankManager;
 use steellgold\betterchat\utils\MySQL;
@@ -24,20 +25,10 @@ final class Session {
 	}
 
 	private static function loadSessionData(Player $player): Session {
-		if (!$player->hasPlayedBefore()) {
-			MySQL::mysqli()->query("INSERT INTO players (player, rank_uuid) VALUES ('{$player->getName()}', '{" . RankManager::DEFAULT . "}')");
-		}
+		if (!$player->hasPlayedBefore()) MySQL::mysqli()->query("INSERT INTO players (player, rank_uuid) VALUES ('{$player->getName()}', '" . RankManager::DEFAULT_RANK["uuid"] . "')");
 		$data = MySQL::mysqli()->query("SELECT * FROM players WHERE player = '{$player->getName()}'")->fetch_assoc();
-		if ($data == null) {
-			var_dump("Player data not found");
-		} else {
-			var_dump($data);
-		}
 
-		return new Session(new Rank("test", "test", [
-			"primary" => "§a",
-			"secondary" => "§b"
-		]));
+		return new Session(BetterChat::getInstance()->getRankManager()->getRank($data["rank_uuid"]));
 	}
 
 	public function __construct(
