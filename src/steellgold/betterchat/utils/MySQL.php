@@ -23,6 +23,7 @@ class MySQL {
 	public static function mysqli(): \mysqli {
 		return self::$mysqli;
 	}
+
 	public static function default(): void {
 		self::mysqli()->query("CREATE TABLE IF NOT EXISTS players (
 			id 					INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
