@@ -33,12 +33,5 @@ class RankManager {
 		return self::$ranks;
 	}
 
-	public static function getRankByIdentifier(string $identifier): ?Rank {
-		foreach (self::$ranks as $rank) {
-			if ($rank->getRankIdentifier() === $identifier) {
-				return $rank;
-			}
-		}
-		return null;
 	}
 }
