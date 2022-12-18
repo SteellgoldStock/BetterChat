@@ -1,6 +1,6 @@
 name: BetterChat
 version: 1.0.0
-main: steellgold/BetterChat
+main: steellgold\betterchat\BetterChat
 api: [4.0.0]
 description: A better chat plugin
 author: Steellgold
