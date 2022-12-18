@@ -3,31 +3,34 @@
 namespace steellgold\betterchat\player\ranks;
 
 class Rank {
+
+	const COLOR_PRIMARY = "primary";
+	const COLOR_SECONDARY = "secondary";
+
 	public function __construct(
 		private string $uuid,
-		private string $rankIdentifier,
-		private string $nametagFormat,
-		private string $chatFormat,
-		private array $permissions
-	) { }
+		private string $displayName,
+		private array  $colors = ["primary" => null, "secondary" => null],
+	) {
+	}
 
 	public function getUuid(): string {
 		return $this->uuid;
 	}
 
-	public function getRankIdentifier(): string {
-		return $this->rankIdentifier;
+	public function getDisplayName(): string {
+		return $this->displayName;
 	}
 
-	public function getNametagFormat(): string {
-		return $this->nametagFormat;
+	public function setDisplayName(string $displayName): void {
+		$this->displayName = $displayName;
 	}
 
-	public function getChatFormat(): string {
-		return $this->chatFormat;
+	public function getColors(): array {
+		return $this->colors;
 	}
 
-	public function getPermissions(): array {
-		return $this->permissions;
+	public function setColor(string $type, string $color): void {
+		$this->colors[$type] = $color;
 	}
 }
