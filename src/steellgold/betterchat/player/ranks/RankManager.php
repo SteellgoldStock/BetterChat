@@ -15,19 +15,7 @@ class RankManager {
 
 	private function loadRanks(): void {
 		$data = MySQL::mysqli()->query("SELECT * FROM ranks")->fetch_all();
-
-		foreach ($data as $rank) {
-			$rank = new Rank(
-				$rank[1],
-				$rank[2],
-				json_decode($rank[3]),
-			);
-			$this->ranks[$rank->getUuid()] = $rank;
-		}
-
-		foreach ($this->ranks as $rank) {
-			var_dump($rank->getDisplayName());
-		}
+		foreach ($data as $rank) $this->ranks[$rank->getUuid()] = new Rank($rank[1], $rank[2], json_decode($rank[3], true));
 	}
 
 	public function addRank(Rank $rank): void {
