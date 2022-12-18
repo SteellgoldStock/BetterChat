@@ -7,7 +7,7 @@ use steellgold\betterchat\utils\MySQL;
 class RankManager {
 
 	/** @var Rank[] $ranks */
-	private static array $ranks = [];
+	private array $ranks = [];
 	public function __construct() {
 		$this->loadRanks();
 	}
