@@ -4,16 +4,15 @@ namespace steellgold\betterchat\listeners;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use steellgold\betterchat\player\Session;
 
 class PlayerListeners implements Listener {
 	public function onPlayerJoin(PlayerJoinEvent $event) {
 		$player = $event->getPlayer();
 
-		if (!$player->hasPlayedBefore()) {
-			// Send default message
-			return;
-		}
-
+		$session = Session::get($player);
 		// Send custom message
+
+		var_dump($session->getRank()->getChatFormat());
 	}
 }
