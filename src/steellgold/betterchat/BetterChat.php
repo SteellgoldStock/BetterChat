@@ -8,7 +8,6 @@ use steellgold\betterchat\commands\RankCommand;
 use steellgold\betterchat\listeners\PlayerListeners;
 use steellgold\betterchat\player\ranks\RankManager;
 use steellgold\betterchat\utils\MySQL;
-use steellgold\betterchat\utils\Translation;
 
 class BetterChat extends PluginBase {
 	public static BetterChat $instance;
