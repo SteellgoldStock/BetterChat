@@ -34,10 +34,9 @@ class MySQL {
 		self::mysqli()->query("CREATE TABLE IF NOT EXISTS ranks (
 			id 					INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 			uuid 				VARCHAR(100) NOT NULL,
-    		rank_identifier 	VARCHAR(20) NOT NULL,
-			nametag_format 		VARCHAR(250) NOT NULL,
-			chat_format 		VARCHAR(250) NOT NULL,
-			permissions 		JSON DEFAULT null
+			display_name 		VARCHAR(250) NOT NULL,
+			colors 				JSON NOT NULL,
+			permissions 		JSON NOT null
 		)");
 	}
 
