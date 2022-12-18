@@ -8,17 +8,29 @@ class RankManager {
 
 	/** @var Rank[] $ranks */
 	private array $ranks = [];
+
 	public function __construct() {
 		$this->loadRanks();
 	}
 
-	private function loadRanks() {
-		$data = MySQL::mysqli()->query("SELECT * FROM ranks")->fetch_assoc();
-		var_dump($data);
-	}
 
 	public static function addRank(Rank $rank): void {
 		self::$ranks[$rank->getUuid()] = $rank;
+	private function loadRanks(): void {
+		$data = MySQL::mysqli()->query("SELECT * FROM ranks")->fetch_all();
+
+		foreach ($data as $rank) {
+			$rank = new Rank(
+				$rank[1],
+				$rank[2],
+				json_decode($rank[3]),
+			);
+			$this->ranks[$rank->getUuid()] = $rank;
+		}
+
+		foreach ($this->ranks as $rank) {
+			var_dump($rank->getDisplayName());
+		}
 	}
 
 	public static function removeRank(string $uuid): void {
