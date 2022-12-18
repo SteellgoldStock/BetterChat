@@ -11,6 +11,5 @@ class PlayerListeners implements Listener {
 		$player = $event->getPlayer();
 
 		$session = Session::get($player);
-		// Send custom message
 	}
 }
