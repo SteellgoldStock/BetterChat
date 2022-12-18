@@ -5,6 +5,7 @@ namespace steellgold\betterchat\utils;
 use steellgold\betterchat\BetterChat;
 
 class MySQL {
+
 	private static \mysqli $mysqli;
 
 	public function __construct() {
@@ -39,5 +40,4 @@ class MySQL {
 			permissions 		JSON NOT null
 		)");
 	}
-
 }

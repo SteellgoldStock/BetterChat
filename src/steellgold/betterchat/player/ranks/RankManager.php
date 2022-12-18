@@ -36,6 +36,10 @@ class RankManager {
 		unset($this->ranks[$uuid]);
 	}
 
+	/**
+	 * @param string $uuid
+	 * @return Rank|null
+	 */
 	public function getRank(string $uuid): ?Rank {
 		return $this->ranks[$uuid] ?? null;
 	}

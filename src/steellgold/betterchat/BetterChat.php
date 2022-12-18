@@ -2,6 +2,7 @@
 
 namespace steellgold\betterchat;
 
+use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
 use pocketmine\plugin\PluginBase;
 use steellgold\betterchat\commands\RankCommand;
@@ -16,15 +17,16 @@ class BetterChat extends PluginBase {
 	const BETTERCHAT_PREFIX = "§f[§gBetterChat§f]§r ";
 	const BETTERCHAT_ERROR = "§f[§cBetterChat§f]§c ";
 
+	/**
+	 * @throws HookAlreadyRegistered
+	 */
 	protected function onEnable(): void {
 		self::$instance = $this;
 		if(!PacketHooker::isRegistered()) {
 			PacketHooker::register($this);
 		}
 
-		$this->saveResource("langs/fr_FR.yml");
-		$this->saveResource("langs/en_US.yml");
-
+		$this->saveResource("formats.json");
 		new MySQL();
 
 		$this->rankManager = new RankManager();
