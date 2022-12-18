@@ -28,7 +28,7 @@ class MySQL {
 		self::mysqli()->query("CREATE TABLE IF NOT EXISTS players (
 			id 					INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 			player 				VARCHAR(100) NOT NULL,
-			player_rank	 		VARCHAR(50) DEFAULT null
+			rank_uuid	 		VARCHAR(50) DEFAULT null
 		)");
 
 		self::mysqli()->query("CREATE TABLE IF NOT EXISTS ranks (

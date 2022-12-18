@@ -9,13 +9,23 @@ class RankManager {
 	/** @var Rank[] $ranks */
 	private array $ranks = [];
 
-	public function __construct() {
-		$this->loadRanks();
-	}
+	const DEFAULT_RANK = [
+		"uuid" => "2d2ee6de-7808-4ab2-8a28-3a6857160531",
+		"display_name" => "Inconnu",
+		"colors" => [
+			"primary" => "\§f",
+			"secondary" => "\§7"
+		]
+	];
 
-	private function loadRanks(): void {
+	public function __construct() {
 		$data = MySQL::mysqli()->query("SELECT * FROM ranks")->fetch_all();
-		foreach ($data as $rank) $this->ranks[$rank->getUuid()] = new Rank($rank[1], $rank[2], json_decode($rank[3], true));
+		foreach ($data as $rank) $this->ranks[$rank[1]] = new Rank($rank[1], $rank[2], json_decode($rank[3], true));
+
+		if (!isset($this->ranks[self::DEFAULT_RANK["uuid"]])) {
+			$this->ranks[self::DEFAULT_RANK["uuid"]] = new Rank(self::DEFAULT_RANK["uuid"], self::DEFAULT_RANK["display_name"], self::DEFAULT_RANK["colors"]);
+			MySQL::mysqli()->query("INSERT INTO ranks (uuid, display_name, colors, permissions) VALUES ('" . self::DEFAULT_RANK["uuid"] . "', '" . self::DEFAULT_RANK["display_name"] . "', '" . json_encode(self::DEFAULT_RANK["colors"]) . "', '[]')");
+		}
 	}
 
 	public function addRank(Rank $rank): void {
