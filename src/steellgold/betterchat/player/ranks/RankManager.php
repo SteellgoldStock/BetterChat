@@ -13,9 +13,6 @@ class RankManager {
 		$this->loadRanks();
 	}
 
-
-	public static function addRank(Rank $rank): void {
-		self::$ranks[$rank->getUuid()] = $rank;
 	private function loadRanks(): void {
 		$data = MySQL::mysqli()->query("SELECT * FROM ranks")->fetch_all();
 
@@ -33,17 +30,19 @@ class RankManager {
 		}
 	}
 
-	public static function removeRank(string $uuid): void {
-		unset(self::$ranks[$uuid]);
+	public function addRank(Rank $rank): void {
+		$this->ranks[$rank->getUuid()] = $rank;
 	}
 
-	public static function getRank(string $uuid): ?Rank {
-		return self::$ranks[$uuid] ?? null;
+	public function removeRank(string $uuid): void {
+		unset($this->ranks[$uuid]);
 	}
 
-	public static function getRanks(): array {
-		return self::$ranks;
+	public function getRank(string $uuid): ?Rank {
+		return $this->ranks[$uuid] ?? null;
 	}
 
+	public function getRanks(): array {
+		return $this->ranks;
 	}
 }
