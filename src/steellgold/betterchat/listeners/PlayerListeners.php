@@ -12,7 +12,5 @@ class PlayerListeners implements Listener {
 
 		$session = Session::get($player);
 		// Send custom message
-
-		var_dump($session->getRank()->getChatFormat());
 	}
 }
