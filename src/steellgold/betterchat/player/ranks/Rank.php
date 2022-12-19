@@ -11,6 +11,7 @@ class Rank {
 		private string $uuid,
 		private string $displayName,
 		private array  $colors = ["primary" => null, "secondary" => null],
+		private bool   $isOperator = false
 	) {
 	}
 
@@ -32,5 +33,13 @@ class Rank {
 
 	public function setColor(string $type, string $color): void {
 		$this->colors[$type] = $color;
+	}
+
+	public function isOperator(): bool {
+		return $this->isOperator;
+	}
+
+	public function setIsOperator(bool $isOperator): void {
+		$this->isOperator = $isOperator;
 	}
 }
