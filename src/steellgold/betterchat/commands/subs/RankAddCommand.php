@@ -31,13 +31,14 @@ class RankAddCommand extends BaseSubCommand {
 		$options[] = new Input("name", "Nom d'affichage du grade", "Administateur");
 		$options[] = new Dropdown("primary", "Couleur primaire (ex: §cRouge§r)", FormsInfos::$colors, 14);
 		$options[] = new Dropdown("secondary", "Couleur secondaire (ex: §gOr§r)", FormsInfos::$colors, 14);
-		$options[] = new Toggle("isDefault", "Définir ce grade comme grade par défaut");
 		$options[] = new Toggle("isOp", "Définir ce grade comme grade opérateur, il aura accès à toutes les commandes");
 
 		$i = 0;
 		foreach (Server::getInstance()->getPluginManager()->getPlugins() as $plugin) {
-			$options[] = new Toggle("plugin_" . $i, $plugin->getName(), false);
-			$i++;
+			if ($plugin->getName() !== "BetterChat") {
+				$options[] = new Toggle("plugin_" . $i, $plugin->getName(), false);
+				$i++;
+			}
 		}
 
 		return new CustomForm(
