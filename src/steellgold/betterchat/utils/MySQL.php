@@ -37,7 +37,8 @@ class MySQL {
 			uuid 				VARCHAR(100) NOT NULL,
 			display_name 		VARCHAR(250) NOT NULL,
 			colors 				JSON NOT NULL,
-			permissions 		JSON NOT null
+			permissions 		JSON NOT null,
+			isOperator 			BOOLEAN NOT NULL
 		)");
 	}
 }
